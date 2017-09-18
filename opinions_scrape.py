@@ -5,18 +5,17 @@ sauce = Request("https://www.washingtonpost.com/news-opinions-sitemap.xml", head
 webpage = urlopen(sauce).read()
 soup = bs.BeautifulSoup(webpage, 'lxml')
 
-##print(soup.title)
-
-##for paragraph in soup.find_all('p'):
- ## print(paragraph.text)
-
-## print(soup.get_text())
 article_url = soup.find_all('loc')[0].text
 article_sauce = Request(article_url, headers={"User-Agent": "Mozilla"})
-print(article_url)
+print(article_url + "\n")
+with open("article_samples/washington_article.txt", "w") as text_file:
+    text_file.write(article_url + "\n")
+
 article = urlopen(article_sauce).read()
 article_soup = bs.BeautifulSoup(article, "lxml")
 
 for paragraph in article_soup.find_all('p'):
-    print(paragraph)
+    with open("article_samples/washington_article.txt", "a") as text_file:
+        print(paragraph.text)
+        text_file.write(paragraph.text)
 
