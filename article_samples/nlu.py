@@ -20,5 +20,6 @@ document = types.Document(
 
 # Detects the sentiment of the text
 sentiment = client.analyze_sentiment(document=document).document_sentiment
+
 print('Text: {}'.format(text.encode('utf-8')))
 print('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))

@@ -1,0 +1,2 @@
+0 8 * * * python opinions_scrape.py
+
