@@ -1,0 +1,6 @@
+#tester {
+  position: fixed; /* or absolute */
+  left: 50%;
+  width:300px;
+  height:500px
+}
