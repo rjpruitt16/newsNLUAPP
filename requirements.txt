@@ -27,3 +27,6 @@ twilio==6.7.1
 unity-lens-photos==1.0
 urllib3==1.22
 Werkzeug==0.12.2
+Django==1.9.8
+pinax-theme-bootstrap==7.10.1
+

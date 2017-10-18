@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import bs4 as bs
 from urllib.request import Request, urlopen
 
