@@ -15,7 +15,6 @@ enum34==1.1.6
 flake8==3.5.0
 Flask==0.12
 gunicorn==19.7.1
-gyp==0.1
 idna==2.6
 ipaddress==1.0.18
 itsdangerous==0.24
