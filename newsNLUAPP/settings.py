@@ -7,13 +7,17 @@ BASE_DIR = PACKAGE_ROOT
 DEBUG = True
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "dev.db",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'newsNLU',                      
+        'USER': 'rahmi',
+        'PASSWORD': 'pass',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
-ALLOWED_HOSTS = ["tranquil-dawn-89602.herokuapp.com", u'localhost']
+ALLOWED_HOSTS = ["tranquil-dawn-89602.herokuapp.com", u'localhost', u'127.0.0.1']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
