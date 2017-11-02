@@ -26,7 +26,7 @@ pathlib==1.0.1
 pew==1.1.0
 pinax-theme-bootstrap==7.10.1
 pipenv==8.3.1
-psycopg2==2.5.3
+psycopg2==2.5.4
 pycodestyle==2.3.1
 pycparser==2.18
 pyflakes==1.6.0
