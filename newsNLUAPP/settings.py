@@ -9,9 +9,9 @@ DEBUG = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'newsNLU',                      
-        'USER': 'rahmi',
-        'PASSWORD': 'pass',
+        'NAME': 'd7jke217gehe33',                      
+        'USER': 'llybxmcgyrcmce',
+        'PASSWORD': 'f4f738486ebc7820c17fc686a3c056fd068f6844a8ee03880c77c224c37685a2',
         'HOST': 'localhost',
         'PORT': '5432',
     }
