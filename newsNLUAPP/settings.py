@@ -1,4 +1,5 @@
 import os
+import dj_database_url
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -7,14 +8,7 @@ BASE_DIR = PACKAGE_ROOT
 DEBUG = True
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd7jke217gehe33',                      
-        'USER': 'llybxmcgyrcmce',
-        'PASSWORD': 'f4f738486ebc7820c17fc686a3c056fd068f6844a8ee03880c77c224c37685a2',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config() 
 }
 
 ALLOWED_HOSTS = ["tranquil-dawn-89602.herokuapp.com", u'localhost', u'127.0.0.1', u'0.0.0.0']
