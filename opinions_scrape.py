@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import bs4 as bs
+import nlu 
 from urllib.request import Request, urlopen
 
 sauce = Request("https://www.washingtonpost.com/news-opinions-sitemap.xml", headers={"User-Agent": "Mozilla"})

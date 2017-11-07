@@ -4,11 +4,11 @@ import dj_database_url
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
 BASE_DIR = PACKAGE_ROOT
-
+SITE_ID = 1
 DEBUG = True
 
 DATABASES = {
-    'default': dj_database_url.config() 
+    'default': dj_database_url.config(default='postgres://rahmi:pass@localhost/dbname') 
 }
 
 ALLOWED_HOSTS = ["tranquil-dawn-89602.herokuapp.com", u'localhost', u'127.0.0.1', u'0.0.0.0']
@@ -106,8 +106,10 @@ MIDDLEWARE_CLASSES = [
     "django.contrib.auth.middleware.SessionAuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 ROOT_URLCONF = "newsNLUAPP.urls"
 
 # Python dotted path to the WSGI application used by Django's runserver.
