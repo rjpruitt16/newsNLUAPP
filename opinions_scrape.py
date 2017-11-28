@@ -40,7 +40,13 @@ if __name__ == "__main__":
   article_sauce = Request(washington_url, headers={"User-Agent": "Mozilla"})
   writeSoupToTextFile("article_samples/washington_article.txt", washington_soup, article_sauce)
 
-  cnn_soup = getFirstUrlSoup("http://www.cnn.com/sitemaps/sitemap-index.xml")
+  cnn_soup = getFirstUrlSoup("http://www.cnn.com/sitemaps/sitemap-articles-2017-11.xml")
   cnn_url = cnn_soup.find_all('loc')[0].text
   cnn_article = getArticle(cnn_url)
   writeArticleToTextFile(cnn_article, "article_samples/cnn_article.txt")  
+
+  huffington_soup = getFirstUrlSoup("https://www.huffingtonpost.com/sitemap.xml")
+  huffington_url = huffington_soup.find_all('loc')[0].text
+  huffington_article = getArticle(huffington_url)
+  writeArticleToTextFile(guffington_article, "article_samples/huffington_article.txt")
+

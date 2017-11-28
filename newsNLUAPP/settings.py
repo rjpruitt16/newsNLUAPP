@@ -1,15 +1,25 @@
 import os
 import dj_database_url
 
+ON_HEROKU = os.environ.get('ON_HEROKU')
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
 BASE_DIR = PACKAGE_ROOT
 SITE_ID = 1
 DEBUG = True
 
-DATABASES = {
-    'default': dj_database_url.config(default='postgres://rahmi:pass@localhost/dbname') 
-}
+DATABASE = {}
+if ON_HEROKU:
+  DATABASE = {
+      'default': dj_database_url.config() 
+  }
+else:
+  DATABASES = {
+    "default": {
+         "ENGINE": "django.db.backends.sqlite3",
+         "NAME": "dev.db",
+    }
+  }
 
 ALLOWED_HOSTS = ["tranquil-dawn-89602.herokuapp.com", u'localhost', u'127.0.0.1', u'0.0.0.0']
 
@@ -165,3 +175,4 @@ FIXTURE_DIRS = [
 ]
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
