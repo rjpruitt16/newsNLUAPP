@@ -41,31 +41,31 @@
           <div class="row">
             <div class="col-6 col-lg-4">
               <h2>Washington Post</h2>
-              <p>{{washington_body}} </p>
+              <p>{{washington_article}}... </p>
               <p><a class="btn btn-secondary" href="{{washington_url}}" role="button">View details &raquo;</a></p>
             </div><!--/span-->
             <div class="col-6 col-lg-4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+              <h2>CNN</h2>
+              <p> {{cnn_article}}... </p>
+              <p><a class="btn btn-secondary" href="{{cnn_url}}" role="button">View details &raquo;</a></p>
             </div><!--/span-->
             <div class="col-6 col-lg-4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+              <h2> Huffington Post</h2>
+              <p>{{huffington_article}}... </p>
+              <p><a class="btn btn-secondary" href="{{huffington_url}}" role="button">View details &raquo;</a></p>
             </div><!--/span-->
             <div class="col-6 col-lg-4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+              <h2>Bloomberg</h2>
+              <p> {{bloomberg_article}}... </p>
+              <p><a class="btn btn-secondary" href="{{foxnews_url}}" role="button">View details &raquo;</a></p>
             </div><!--/span-->
             <div class="col-6 col-lg-4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+              <h2> Fox News </h2>
+              <p> {{foxnews_article}}... </p>
+              <p><a class="btn btn-secondary" href="{{foxnews_url}}" role="button">View details &raquo;</a></p>
             </div><!--/span-->
             <div class="col-6 col-lg-4">
-              <h2>Heading</h2>
+              <h2>NPR</h2>
               <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
               <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
             </div><!--/span-->
@@ -75,15 +75,10 @@
         <div class="col-6 col-md-3 sidebar-offcanvas" id="sidebar">
           <div class="list-group">
             <a href="{{washington_url}}" class="list-group-item active">Washington Post</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
+            <a href="{{cnn_url}}" class="list-group-item"> CNN </a>
+            <a href="{{huffington_url}}" class="list-group-item"> Huffington Post</a>
+            <a href="{{bloomberg_url}}" class="list-group-item">bloomberg</a>
+            <a href="{{foxnews_url}}" class="list-group-item">Fox News</a>
           </div>
         </div><!--/span-->
       </div><!--/row-->
@@ -96,14 +91,34 @@
 
     </div><!--/.container-->
     <!-- Plotting NLP data using Plotly.js0  -->
-    <div id="tester"></div>
-   
+  <div id="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
     <script>
-	TESTER = document.getElementById('tester');
-	Plotly.plot( TESTER, [{
-	x: [1, 2, 3, 4, 5],
-	y: [1, 2, 4, 8, 16] }], {
-	margin: { t: 0 } } );
+       console.log({{washington_sentiment_x}});
+       console.log({{washington_sentiment_y}});
+       var trace1 = {
+         x: [{{washington_sentiment_x}}, {{cnn_sentiment_x}}, {{huffington_sentiment_x}}, {{bloomberg_sentiment_x}}, {{foxnews_sentiment_x}}],
+         y: [{{washington_sentiment_y}}, {{cnn_sentiment_y}}, {{huffington_sentiment_y}}, {{bloomberg_sentiment_y}}, {{foxnews_sentiment_y}}],
+         mode: 'markers',
+         type: 'scatter',
+         name: 'Team A',
+         text: ['Washington Post', 'CNN', 'Huffington Post', 'Bloomberg', 'Fox News'],
+         marker: { size: 12 }
+       };
+
+
+      var data = [ trace1];
+
+      var layout = {
+        xaxis: {
+        range: [ -1.25, 1.25 ]
+      },
+        yaxis: {
+        range: [0, 20]
+      },
+      title:'Data Labels Hover'
+      };
+
+      Plotly.newPlot('myDiv', data, layout);      
    </script> 
 
 

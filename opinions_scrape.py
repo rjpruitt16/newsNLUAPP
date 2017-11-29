@@ -2,10 +2,11 @@
 import bs4 as bs
 from urllib.request import Request, urlopen
 from newspaper import Article
-
+from nlu import getSentiment
 def getArticle(url):
   article = Article(url)
   article.download()
+  article.parse()
   return article
 
 def writeSoupToTextFile(path, soup, article_sauce):
@@ -18,7 +19,6 @@ def writeSoupToTextFile(path, soup, article_sauce):
 
   for paragraph in article_soup.find_all('p'):
     with open(path, "a") as text_file:
-      print(paragraph.text)
       text_file.write(paragraph.text)
 
 
@@ -28,25 +28,27 @@ def getFirstUrlSoup(sitemap):
   soup = bs.BeautifulSoup(webpage, 'lxml')
   return soup
 
-def writeArticleToTextFile(article, path):
+def writeArticleToTextFile(article, path, sentiment):
+  article.download()
   with open(path, "w") as text_file:
-    text_file.write(article.source_url)
-    text_file.write(article.text)
+    text_file.write('{}\n{}\n{} {}'.format(article.url, article.text.replace('\n\n', ' '), sentiment[0], sentiment[1]))
 
-
+def FindAndWriteArticle(sitemap, article_name):
+  soup = getFirstUrlSoup(sitemap)
+  url = soup.find_all('loc')[0].text
+  article = getArticle(url)
+  sentiment = getSentimemt(article)
+  writeArticleToTextFile(article, "article_samples/" + article_name, sentiment)
+  
 if __name__ == "__main__":
-  washington_soup = getFirstUrlSoup("https://www.washingtonpost.com/news-opinions-sitemap.xml")
-  washington_url = washington_soup.find_all('loc')[0].text
-  article_sauce = Request(washington_url, headers={"User-Agent": "Mozilla"})
-  writeSoupToTextFile("article_samples/washington_article.txt", washington_soup, article_sauce)
+  FindAndWriteArticle("https://www.washingtonpost.com/news-opinions-sitemap.xml", 'washington_article.txt')
 
-  cnn_soup = getFirstUrlSoup("http://www.cnn.com/sitemaps/sitemap-articles-2017-11.xml")
-  cnn_url = cnn_soup.find_all('loc')[0].text
-  cnn_article = getArticle(cnn_url)
-  writeArticleToTextFile(cnn_article, "article_samples/cnn_article.txt")  
+  FindAndWriteArticle("http://www.cnn.com/sitemaps/sitemap-articles-2017-11.xml", "cnn_article.txt")
 
-  huffington_soup = getFirstUrlSoup("https://www.huffingtonpost.com/sitemap.xml")
-  huffington_url = huffington_soup.find_all('loc')[0].text
-  huffington_article = getArticle(huffington_url)
-  writeArticleToTextFile(guffington_article, "article_samples/huffington_article.txt")
+  FindAndWriteArticle("https://www.huffingtonpost.com/sitemap.xml", "huffington_article.txt")
 
+  #FindAndWriteArticle("http://www.playgroundsforeveryone.com/sitemap.xml", "npr_article.txt")
+
+  FindAndWriteArticle("http://www.foxnews.com/sitemap.xml?idx=26", "foxnews_article.txt")
+
+  FindAndWriteArticle("https://www.bloomberg.com/feeds/bpol/sitemap_news.xml", "bloomberg_article.txt")

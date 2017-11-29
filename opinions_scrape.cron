@@ -1,1 +1,2 @@
-0 8/5 * * * cd /home/rahmi/Documents/newsNLUAPP/ && ./opinions_scrape.py
+0 8/5 0 * * cd /home/rahmi/Documents/newsNLUAPP/ && ./opinions_scrape.py
+0 8/5 1 * * cd /home/rahmi/Documents/newsNLUAPP/ && ./nlu.py
